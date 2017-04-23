@@ -1,14 +1,14 @@
 NAME := fsbext
-SRCFILES := @srcdir@/src/fsbext.c
+SRCFILES := ./src/fsbext.c
 OBJECTS := $(notdir ${SRCFILES:.c=.o})
 
-prefix := @prefix@
-exec_prefix := @exec_prefix@
-bindir := @bindir@
+prefix := /usr/local
+exec_prefix := ${prefix}
+bindir := ${exec_prefix}/bin
 
-CFLAGS += -I@srcdir@/src 
+CFLAGS += -I./src 
 CFLAGS += -Wno-format 
-CFLAGS += @configure_flags@ 
+CFLAGS +=  
 CFLAGS += -O
 
 LD := $(CC)
@@ -26,7 +26,7 @@ all:	$(NAME)
 install: $(NAME)
 	cp $(NAME) $(bindir)
 
-%.o: @srcdir@/src/%.c
+%.o: ./src/%.c
 	$(CC) -c -o $@ $< $(CFLAGS)
 
 $(NAME): $(OBJECTS)
